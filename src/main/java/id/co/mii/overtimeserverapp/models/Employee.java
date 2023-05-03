@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -44,6 +46,10 @@ public class Employee {
 
     @Column(name = "payroll", nullable = false)
     private int payroll;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
+    private Department department;
 
     @OneToOne(mappedBy = "employee")
     @PrimaryKeyJoinColumn
