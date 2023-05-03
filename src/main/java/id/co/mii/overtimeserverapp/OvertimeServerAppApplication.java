@@ -8,6 +8,8 @@ public class OvertimeServerAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OvertimeServerAppApplication.class, args);
+		
+		System.out.println("Overtime Server App is Running...");
 	}
 
 }
