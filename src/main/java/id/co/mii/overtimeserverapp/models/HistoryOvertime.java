@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "history_reimburse")
+@Table(name = "history_overtime")
 public class HistoryOvertime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
