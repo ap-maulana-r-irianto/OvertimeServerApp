@@ -40,7 +40,7 @@ public class Employee {
     private String email;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    private Boolean status;
 
     @Column(name = "payroll", nullable = false)
     private int payroll;

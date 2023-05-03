@@ -46,7 +46,7 @@ public class Project {
     private int budget;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    private Boolean status;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "employee_project", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
