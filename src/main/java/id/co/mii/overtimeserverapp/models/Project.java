@@ -1,5 +1,6 @@
 package id.co.mii.overtimeserverapp.models;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,10 +37,10 @@ public class Project {
     private String description;
 
     @Column(name = "start_date", nullable = false)
-    private String start_date;
+    private LocalDateTime start_date;
 
     @Column(name = "end_date", nullable = false)
-    private String end_date;
+    private LocalDateTime end_date;
 
     @Column(name = "budget", nullable = false)
     private int budget;

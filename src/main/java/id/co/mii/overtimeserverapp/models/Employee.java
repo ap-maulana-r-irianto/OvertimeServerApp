@@ -39,10 +39,10 @@ public class Employee {
     @Column(unique = true, name = "email", nullable = false)
     private String email;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "status", nullable = false)
     private String status;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "payroll", nullable = false)
     private int payroll;
 
     @OneToOne(mappedBy = "employee")
