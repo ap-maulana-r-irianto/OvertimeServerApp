@@ -2,11 +2,13 @@ package id.co.mii.overtimeserverapp.services;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import id.co.mii.overtimeserverapp.models.HistoryReimburse;
+import id.co.mii.overtimeserverapp.models.dto.requests.HistoryReimburseRequest;
 import id.co.mii.overtimeserverapp.repositories.HistoryReimburseRepository;
 import lombok.AllArgsConstructor;
 
@@ -15,6 +17,8 @@ import lombok.AllArgsConstructor;
 public class HistoryReimburseService {
     
     private HistoryReimburseRepository historyReimburseRepository;
+    private ReimburseService reimburseService;
+    private ModelMapper modelMapper;
 
     public List<HistoryReimburse> getAll() {
         return historyReimburseRepository.findAll();
@@ -28,7 +32,13 @@ public class HistoryReimburseService {
                         "HistoryReimburse not found!!"));
     }
 
-    public HistoryReimburse create(HistoryReimburse historyReimburse) {
+    // public HistoryReimburse create(HistoryReimburse historyReimburse) {
+    //     return historyReimburseRepository.save(historyReimburse);
+    // }
+
+    public HistoryReimburse create(HistoryReimburseRequest historyReimburseRequest) {
+        HistoryReimburse historyReimburse = modelMapper.map(historyReimburseRequest, HistoryReimburse.class);
+        historyReimburse.setReimburse(reimburseService.getById(historyReimburseRequest.getReimburse_id()));
         return historyReimburseRepository.save(historyReimburse);
     }
 

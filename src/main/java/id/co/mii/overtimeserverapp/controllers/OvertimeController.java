@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import id.co.mii.overtimeserverapp.models.Overtime;
+import id.co.mii.overtimeserverapp.models.dto.requests.OvertimeRequest;
 import id.co.mii.overtimeserverapp.services.OvertimeService;
 import lombok.AllArgsConstructor;
 
@@ -36,9 +37,14 @@ public class OvertimeController {
         return overtimeService.getById(id);
     }
 
+    // @PostMapping("hasAuthority('CREATE_ADMIN')")
+    // public Overtime create(@RequestBody Overtime overtime) {
+    //     return overtimeService.create(overtime);
+    // }
+
     @PostMapping("hasAuthority('CREATE_ADMIN')")
-    public Overtime create(@RequestBody Overtime overtime) {
-        return overtimeService.create(overtime);
+    public Overtime create(@RequestBody OvertimeRequest overtimeRequest) {
+        return overtimeService.create(overtimeRequest);
     }
 
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")

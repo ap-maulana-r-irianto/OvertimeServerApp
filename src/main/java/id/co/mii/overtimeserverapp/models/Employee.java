@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -50,6 +51,14 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
     private Department department;
+
+    @OneToOne(mappedBy="manager")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Employee> manager;
+
+    @OneToMany(mappedBy="hr")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Employee> hr;
 
     @OneToOne(mappedBy = "employee")
     @PrimaryKeyJoinColumn

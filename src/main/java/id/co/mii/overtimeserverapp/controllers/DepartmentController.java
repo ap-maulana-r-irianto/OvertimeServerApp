@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import id.co.mii.overtimeserverapp.models.Department;
+import id.co.mii.overtimeserverapp.models.dto.requests.DepartmentRequest;
 import id.co.mii.overtimeserverapp.services.DepartmentService;
 import lombok.AllArgsConstructor;
 
@@ -36,9 +37,14 @@ public class DepartmentController {
         return departmentService.getById(id);
     }
 
+    // @PostMapping("hasAuthority('CREATE_ADMIN')")
+    // public Department create(@RequestBody Department department) {
+    //     return departmentService.create(department);
+    // }
+
     @PostMapping("hasAuthority('CREATE_ADMIN')")
-    public Department create(@RequestBody Department department) {
-        return departmentService.create(department);
+    public Department create(@RequestBody DepartmentRequest departmentRequest) {
+        return departmentService.create(departmentRequest);
     }
 
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")

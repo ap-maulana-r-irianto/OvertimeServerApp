@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import id.co.mii.overtimeserverapp.models.Reimburse;
+import id.co.mii.overtimeserverapp.models.dto.requests.ReimburseRequest;
 import id.co.mii.overtimeserverapp.services.ReimburseService;
 import lombok.AllArgsConstructor;
 
@@ -36,9 +37,14 @@ public class ReimburseController {
         return reimburseService.getById(id);
     }
 
+    // @PostMapping("hasAuthority('CREATE_ADMIN')")
+    // public Reimburse create(@RequestBody Reimburse reimburse) {
+    //     return reimburseService.create(reimburse);
+    // }
+
     @PostMapping("hasAuthority('CREATE_ADMIN')")
-    public Reimburse create(@RequestBody Reimburse reimburse) {
-        return reimburseService.create(reimburse);
+    public Reimburse create(@RequestBody ReimburseRequest reimburseRequest) {
+        return reimburseService.create(reimburseRequest);
     }
 
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")

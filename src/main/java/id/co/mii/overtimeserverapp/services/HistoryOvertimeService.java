@@ -2,11 +2,13 @@ package id.co.mii.overtimeserverapp.services;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import id.co.mii.overtimeserverapp.models.HistoryOvertime;
+import id.co.mii.overtimeserverapp.models.dto.requests.HistoryOvertimeRequest;
 import id.co.mii.overtimeserverapp.repositories.HistoryOvertimeRepository;
 import lombok.AllArgsConstructor;
 
@@ -15,6 +17,8 @@ import lombok.AllArgsConstructor;
 public class HistoryOvertimeService {
 
     private HistoryOvertimeRepository historyOvertimeRepository;
+    private OvertimeService overtimeService;
+    private ModelMapper modelMapper;
 
     public List<HistoryOvertime> getAll() {
         return historyOvertimeRepository.findAll();
@@ -28,7 +32,13 @@ public class HistoryOvertimeService {
                         "HistoryOvertime not found!!"));
     }
 
-    public HistoryOvertime create(HistoryOvertime historyOvertime) {
+    // public HistoryOvertime create(HistoryOvertime historyOvertime) {
+    //     return historyOvertimeRepository.save(historyOvertime);
+    // }
+
+    public HistoryOvertime create(HistoryOvertimeRequest historyOvertimeRequest) {
+        HistoryOvertime historyOvertime = modelMapper.map(historyOvertimeRequest, HistoryOvertime.class);
+        historyOvertime.setOvertime(overtimeService.getById(historyOvertimeRequest.getOvertime_id()));
         return historyOvertimeRepository.save(historyOvertime);
     }
 
