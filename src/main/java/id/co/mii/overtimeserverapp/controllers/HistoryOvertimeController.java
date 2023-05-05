@@ -37,12 +37,13 @@ public class HistoryOvertimeController {
         return historyOvertimeService.getById(id);
     }
 
-    // @PostMapping("hasAuthority('CREATE_ADMIN')")
+    // @PostMapping
     // public HistoryOvertime create(@RequestBody HistoryOvertime historyOvertime) {
     //     return historyOvertimeService.create(historyOvertime);
     // }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public HistoryOvertime create(@RequestBody HistoryOvertimeRequest historyOvertimeRequest) {
         return historyOvertimeService.create(historyOvertimeRequest);
     }

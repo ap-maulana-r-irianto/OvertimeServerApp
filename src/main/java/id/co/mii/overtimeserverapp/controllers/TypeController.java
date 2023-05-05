@@ -36,7 +36,8 @@ public class TypeController {
         return typeService.getById(id);
     }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public Type create(@RequestBody Type type) {
         return typeService.create(type);
     }

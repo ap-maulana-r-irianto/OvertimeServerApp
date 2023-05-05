@@ -36,7 +36,8 @@ public class RoleController {
         return roleService.getById(id);
     }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public Role create(@RequestBody Role role) {
         return roleService.create(role);
     }

@@ -39,12 +39,13 @@ public class ReimburseController {
         return reimburseService.getById(id);
     }
 
-    // @PostMapping("hasAuthority('CREATE_ADMIN')")
+    // @PostMapping
     // public Reimburse create(@RequestBody Reimburse reimburse) {
     //     return reimburseService.create(reimburse);
     // }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public Reimburse create(@RequestBody ReimburseRequest reimburseRequest, @RequestParam("file") MultipartFile file) {
         return reimburseService.create(reimburseRequest, file);
     }

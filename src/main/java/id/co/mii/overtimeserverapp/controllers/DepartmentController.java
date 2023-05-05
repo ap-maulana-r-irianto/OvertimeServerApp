@@ -37,12 +37,13 @@ public class DepartmentController {
         return departmentService.getById(id);
     }
 
-    // @PostMapping("hasAuthority('CREATE_ADMIN')")
+    // @PostMapping
     // public Department create(@RequestBody Department department) {
     //     return departmentService.create(department);
     // }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public Department create(@RequestBody DepartmentRequest departmentRequest) {
         return departmentService.create(departmentRequest);
     }

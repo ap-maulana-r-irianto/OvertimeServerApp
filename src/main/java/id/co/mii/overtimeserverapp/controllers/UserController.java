@@ -36,7 +36,8 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public User create(@RequestBody User user) {
         return userService.create(user);
     }

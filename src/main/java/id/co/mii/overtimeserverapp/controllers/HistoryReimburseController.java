@@ -37,12 +37,13 @@ public class HistoryReimburseController {
         return historyReimburseService.getById(id);
     }
 
-    // @PostMapping("hasAuthority('CREATE_ADMIN')")
+    // @PostMapping
     // public HistoryReimburse create(@RequestBody HistoryReimburse historyReimburse) {
     //     return historyReimburseService.create(historyReimburse);
     // }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public HistoryReimburse create(@RequestBody HistoryReimburseRequest historyReimburseRequest) {
         return historyReimburseService.create(historyReimburseRequest);
     }

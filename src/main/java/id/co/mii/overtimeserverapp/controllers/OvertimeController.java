@@ -37,12 +37,13 @@ public class OvertimeController {
         return overtimeService.getById(id);
     }
 
-    // @PostMapping("hasAuthority('CREATE_ADMIN')")
+    // @PostMapping
     // public Overtime create(@RequestBody Overtime overtime) {
     //     return overtimeService.create(overtime);
     // }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public Overtime create(@RequestBody OvertimeRequest overtimeRequest) {
         return overtimeService.create(overtimeRequest);
     }

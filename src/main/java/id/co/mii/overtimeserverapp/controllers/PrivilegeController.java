@@ -36,7 +36,8 @@ public class PrivilegeController {
         return privilegeService.getById(id);
     }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public Privilege create(@RequestBody Privilege privilege) {
         return privilegeService.create(privilege);
     }

@@ -36,7 +36,8 @@ public class EmployeeController {
         return employeeService.getById(id);
     }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public Employee create(@RequestBody Employee employee) {
         return employeeService.create(employee);
     }

@@ -36,7 +36,8 @@ public class ProjectController {
         return projectService.getById(id);
     }
 
-    @PostMapping("hasAuthority('CREATE_ADMIN')")
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping
     public Project create(@RequestBody Project project) {
         return projectService.create(project);
     }
