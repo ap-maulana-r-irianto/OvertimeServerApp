@@ -52,7 +52,7 @@ public class Employee {
     @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
     private Department department;
 
-    @OneToOne(mappedBy="manager")
+    @OneToMany(mappedBy="manager")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Employee> manager;
 

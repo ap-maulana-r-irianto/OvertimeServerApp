@@ -1,10 +1,13 @@
 package id.co.mii.overtimeserverapp.services;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import id.co.mii.overtimeserverapp.models.Reimburse;
@@ -37,11 +40,18 @@ public class ReimburseService {
     //     return reimburseRepository.save(reimburse);
     // }
 
-    public Reimburse create(ReimburseRequest reimburseRequest) {
+    public Reimburse create(ReimburseRequest reimburseRequest, MultipartFile file) {
         Reimburse reimburse = modelMapper.map(reimburseRequest, Reimburse.class);
-        reimburse.setEmployee(employeeService.getById(reimburseRequest.getEmployee_id()));
-        reimburse.setType(typeService.getById(reimburseRequest.getType_id()));
-        return reimburseRepository.save(reimburse);
+        try {
+            reimburse.setEmployee(employeeService.getById(reimburseRequest.getEmployee_id()));
+            reimburse.setType(typeService.getById(reimburseRequest.getType_id()));
+            reimburse.setFile_name(StringUtils.cleanPath(file.getOriginalFilename()));
+            reimburse.setFile_type(file.getContentType());
+            reimburse.setData(file.getBytes());
+            return reimburseRepository.save(reimburse);
+        } catch (IOException ex) {
+            return null;
+        }
     }
 
     public Reimburse update(Integer id, Reimburse reimburse) {

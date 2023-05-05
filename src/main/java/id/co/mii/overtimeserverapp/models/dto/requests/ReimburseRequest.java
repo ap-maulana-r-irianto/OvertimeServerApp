@@ -6,7 +6,9 @@ import lombok.Data;
 public class ReimburseRequest {
     private Integer nominal;
     private String description;
-    private String file;
+    private String file_name;
+    private String file_type;
+    private byte[] data;
     private String status;
     private Integer employee_id;
     private Integer type_id;

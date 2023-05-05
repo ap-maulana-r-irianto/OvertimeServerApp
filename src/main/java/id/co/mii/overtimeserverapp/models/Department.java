@@ -29,7 +29,7 @@ public class Department {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "manager_id", referencedColumnName = "id", nullable = false)
     private Employee manager;
 
