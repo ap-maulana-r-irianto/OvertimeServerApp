@@ -7,8 +7,7 @@ import lombok.Data;
 @Data
 public class OvertimeRequest {
     private String description;
-    private LocalDateTime start_time;
-    private LocalDateTime end_time;
-    private String status;
+    // private LocalDateTime start_time;
+    // private LocalDateTime end_time;
     private Integer employee_project_id;
 }

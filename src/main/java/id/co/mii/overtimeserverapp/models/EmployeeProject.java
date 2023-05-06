@@ -27,7 +27,7 @@ public class EmployeeProject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
     
     @ManyToOne

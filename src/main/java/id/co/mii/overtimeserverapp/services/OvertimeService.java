@@ -1,5 +1,6 @@
 package id.co.mii.overtimeserverapp.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -38,6 +39,9 @@ public class OvertimeService {
 
     public Overtime create(OvertimeRequest overtimeRequest) {
         Overtime overtime = modelMapper.map(overtimeRequest, Overtime.class);
+        overtime.setStart_time(LocalDateTime.now());
+        overtime.setEnd_time(LocalDateTime.now());
+        overtime.setStatus("pending");
         overtime.setEmployeeProject(employeeProjectService.getById(overtimeRequest.getEmployee_project_id()));
         return overtimeRepository.save(overtime);
     }
