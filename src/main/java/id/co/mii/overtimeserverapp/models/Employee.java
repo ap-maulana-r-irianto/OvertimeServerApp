@@ -43,13 +43,13 @@ public class Employee {
     private String email;
 
     @Column(name = "status", nullable = false)
-    private Boolean status;
+    private Boolean status = true;
 
     @Column(name = "payroll", nullable = false)
     private int payroll;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
     @OneToMany(mappedBy="manager")
@@ -64,7 +64,7 @@ public class Employee {
     @PrimaryKeyJoinColumn
     private User user;
 
+    @OneToMany(mappedBy="employee")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToMany(mappedBy = "employee")
-    private List<Project> project;
+    private List<EmployeeProject> employeeProject;
 }

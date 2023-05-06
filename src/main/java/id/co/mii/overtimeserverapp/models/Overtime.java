@@ -39,6 +39,6 @@ public class Overtime {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "employee_project_id", referencedColumnName = "employee_project_id", nullable = false)
+    @JoinColumn(name = "employee_project_id", referencedColumnName = "id", nullable = false)
     private EmployeeProject employeeProject;
 }

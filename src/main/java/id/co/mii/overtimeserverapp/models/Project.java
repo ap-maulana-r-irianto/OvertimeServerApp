@@ -1,19 +1,17 @@
 package id.co.mii.overtimeserverapp.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,18 +35,18 @@ public class Project {
     private String description;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDateTime start_date;
+    private LocalDate start_date;
 
     @Column(name = "end_date", nullable = false)
-    private LocalDateTime end_date;
+    private LocalDate end_date;
 
     @Column(name = "budget", nullable = false)
     private int budget;
 
     @Column(name = "status", nullable = false)
-    private Boolean status;
+    private Boolean status = false;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "employee_project", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    private List<Employee> employee;
+    @OneToMany(mappedBy="project")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<EmployeeProject> employeeProject;
 }

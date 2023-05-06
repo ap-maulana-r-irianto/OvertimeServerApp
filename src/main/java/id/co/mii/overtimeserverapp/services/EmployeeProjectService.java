@@ -2,11 +2,13 @@ package id.co.mii.overtimeserverapp.services;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import id.co.mii.overtimeserverapp.models.EmployeeProject;
+import id.co.mii.overtimeserverapp.models.dto.requests.EmployeeProjectRequest;
 import id.co.mii.overtimeserverapp.repositories.EmployeeProjectRepository;
 import lombok.AllArgsConstructor;
 
@@ -15,6 +17,9 @@ import lombok.AllArgsConstructor;
 public class EmployeeProjectService {
     
     private EmployeeProjectRepository employeeProjectRepository;
+    private ProjectService projectService;
+    private EmployeeService employeeService;
+    private ModelMapper modelMapper;
 
     public List<EmployeeProject> getAll() {
         return employeeProjectRepository.findAll();
@@ -28,7 +33,16 @@ public class EmployeeProjectService {
                         "EmployeeProject not found!!"));
     }
 
-    public EmployeeProject create(EmployeeProject employeeProject) {
+    public EmployeeProject create(EmployeeProjectRequest employeeProjectRequest) {
+        EmployeeProject employeeProject = modelMapper.map(employeeProjectRequest, EmployeeProject.class);
+        employeeProject.setProject(projectService.getById(employeeProjectRequest.getProject_id()));
+        employeeProject.setEmployee(employeeService.getById(employeeProjectRequest.getEmployee_id()));
+        return employeeProjectRepository.save(employeeProject);
+    }
+
+    public EmployeeProject update(Integer id, EmployeeProject employeeProject) {
+        getById(id); // method getById
+        employeeProject.setId(id);
         return employeeProjectRepository.save(employeeProject);
     }
 

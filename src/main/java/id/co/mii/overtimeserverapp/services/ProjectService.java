@@ -45,12 +45,5 @@ public class ProjectService {
         projectRepository.delete(project);
         return project;
     }
-
-    public Project addEmployee(Integer id, Employee employee) {
-        Project projects = getById(id);
-        List<Employee> employees = projects.getEmployee();
-        employees.add(employeeService.getById(employee.getId()));
-        projects.setEmployee(employees);
-        return projectRepository.save(projects);
-      }
+    
 }

@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class UserService {
-    
+
     private UserRepository userRepository;
     private RoleService roleService;
 
@@ -52,5 +52,5 @@ public class UserService {
         roles.add(roleService.getById(role.getId()));
         user.setRole(roles);
         return userRepository.save(user);
-      }
+    }
 }

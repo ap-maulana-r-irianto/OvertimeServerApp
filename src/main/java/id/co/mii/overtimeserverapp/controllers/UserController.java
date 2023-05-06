@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import id.co.mii.overtimeserverapp.models.Role;
 import id.co.mii.overtimeserverapp.models.User;
 import id.co.mii.overtimeserverapp.services.UserService;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/user")
 @PreAuthorize("hasRole('ADMIN')")
 public class UserController {
-    
+
     private UserService userService;
 
     @PreAuthorize("hasAuthority('READ_ADMIN')")
@@ -55,4 +56,11 @@ public class UserController {
     public User delete(@PathVariable Integer id) {
         return userService.delete(id);
     }
+
+    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    @PostMapping("/{id}")
+    public User addRole(@PathVariable Integer id, @RequestBody Role role) {
+        return userService.addRole(id, role);
+    }
+    
 }
