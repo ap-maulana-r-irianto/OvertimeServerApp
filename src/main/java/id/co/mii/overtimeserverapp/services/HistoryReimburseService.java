@@ -49,7 +49,7 @@ public class HistoryReimburseService {
         reimburseService.update(historyReimburseRequest.getReimburse_id(), reimburse);
         if (reimburse.getStatus().contains("hr")) {
             Employee employee = reimburse.getEmployee();
-            int newPayroll = employee.getPayroll()+100000;
+            int newPayroll = employee.getPayroll()+reimburse.getNominal();
             employee.setPayroll(newPayroll);
             employeeService.update(employee.getId(), employee);
         }

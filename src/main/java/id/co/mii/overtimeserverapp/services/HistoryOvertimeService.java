@@ -1,5 +1,6 @@
 package id.co.mii.overtimeserverapp.services;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +25,6 @@ public class HistoryOvertimeService {
     private HistoryOvertimeRepository historyOvertimeRepository;
     private OvertimeService overtimeService;
     private ProjectService projectService;
-    private EmployeeProjectService employeeProjectService;
     private EmployeeService employeeService;
     private ModelMapper modelMapper;
 
@@ -52,13 +52,14 @@ public class HistoryOvertimeService {
         overtime.setStatus(historyOvertime.getStatus());
         overtimeService.update(historyOvertimeRequest.getOvertime_id(), overtime);
         if (overtime.getStatus().contains("hr")) {
+            Duration time = Duration.between(overtime.getEnd_time(), overtime.getStart_time());
             EmployeeProject employeeProject = overtime.getEmployeeProject();
             Project project = employeeProject.getProject();
-            int newBudget = project.getBudget()-100000;
+            int newBudget = (int)(project.getBudget()-(time.toMinutes()*1000));
             project.setBudget(newBudget);
             projectService.update(project.getId(), project);
             Employee employee = employeeProject.getEmployee();
-            int newPayroll = employee.getPayroll()+100000;
+            int newPayroll = (int)(employee.getPayroll()+(time.toMinutes()*1000));
             employee.setPayroll(newPayroll);
             employeeService.update(employee.getId(), employee);
         }

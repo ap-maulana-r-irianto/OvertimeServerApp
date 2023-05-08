@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import id.co.mii.overtimeserverapp.models.Employee;
 import id.co.mii.overtimeserverapp.models.Project;
 import id.co.mii.overtimeserverapp.repositories.ProjectRepository;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,6 @@ import lombok.AllArgsConstructor;
 public class ProjectService {
 
     private ProjectRepository projectRepository;
-    private EmployeeService employeeService;
 
     public List<Project> getAll() {
         return projectRepository.findAll();
