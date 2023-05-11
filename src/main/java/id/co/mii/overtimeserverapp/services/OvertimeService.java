@@ -39,8 +39,7 @@ public class OvertimeService {
 
     public Overtime create(OvertimeRequest overtimeRequest) {
         Overtime overtime = modelMapper.map(overtimeRequest, Overtime.class);
-        overtime.setStart_time(overtimeRequest.getStart_time());;
-        overtime.setEnd_time(overtimeRequest.getEnd_time());
+        overtime.setDate_time(LocalDateTime.now());
         overtime.setStatus("pending");
         overtime.setEmployeeProject(employeeProjectService.getById(overtimeRequest.getEmployee_project_id()));
         return overtimeRepository.save(overtime);

@@ -1,5 +1,6 @@
 package id.co.mii.overtimeserverapp.models;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,14 +36,8 @@ public class Reimburse {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "file_name", nullable = false)
-    private String file_name;
-
-    @Column(name = "file_type", nullable = false)
-    private String file_type;
-
-    @Lob
-    private byte[] data;
+    @Column(name = "date_time", nullable = false)
+    private LocalDateTime date_time;
 
     @Column(name = "status", nullable = false)
     private String status;

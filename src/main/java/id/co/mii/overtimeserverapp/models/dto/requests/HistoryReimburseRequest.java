@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class HistoryReimburseRequest {
+    private LocalDateTime date_time;
     private String status;
     private String description;
     private Integer reimburse_id;

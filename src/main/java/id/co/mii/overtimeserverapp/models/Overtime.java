@@ -35,6 +35,9 @@ public class Overtime {
     @Column(name = "end_time", nullable = false)
     private LocalDateTime end_time;
 
+    @Column(name = "date_time", nullable = false)
+    private LocalDateTime date_time;
+
     @Column(name = "status", nullable = false)
     private String status;
 
