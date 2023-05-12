@@ -36,6 +36,6 @@ public class HistoryReimburse {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "reimburse_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "reimburse_id", referencedColumnName = "id")
     private Reimburse reimburse;
 }

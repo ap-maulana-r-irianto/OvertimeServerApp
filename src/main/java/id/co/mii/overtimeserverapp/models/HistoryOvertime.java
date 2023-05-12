@@ -36,6 +36,6 @@ public class HistoryOvertime {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "overtime_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "overtime_id", referencedColumnName = "id")
     private Overtime overtime;
 }

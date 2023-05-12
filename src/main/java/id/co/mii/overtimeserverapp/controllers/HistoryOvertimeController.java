@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import id.co.mii.overtimeserverapp.models.HistoryOvertime;
-import id.co.mii.overtimeserverapp.models.dto.requests.HistoryOvertimeRequest;
 import id.co.mii.overtimeserverapp.services.HistoryOvertimeService;
 import lombok.AllArgsConstructor;
 
@@ -44,8 +43,8 @@ public class HistoryOvertimeController {
 
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
-    public HistoryOvertime create(@RequestBody HistoryOvertimeRequest historyOvertimeRequest) {
-        return historyOvertimeService.create(historyOvertimeRequest);
+    public HistoryOvertime create(@RequestBody HistoryOvertime historyOvertime) {
+        return historyOvertimeService.create(historyOvertime);
     }
 
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")

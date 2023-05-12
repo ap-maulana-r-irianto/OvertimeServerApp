@@ -12,52 +12,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import id.co.mii.overtimeserverapp.models.HistoryReimburse;
-import id.co.mii.overtimeserverapp.services.HistoryReimburseService;
+import id.co.mii.overtimeserverapp.models.Status;
+import id.co.mii.overtimeserverapp.services.StatusService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/historyreimburse")
+@RequestMapping("/status")
 @PreAuthorize("hasRole('ADMIN')")
-public class HistoryReimburseController {
+public class StatusController {
     
-    private HistoryReimburseService historyReimburseService;
+    private StatusService statusService;
 
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping
-    public List<HistoryReimburse> getAll() {
-        return historyReimburseService.getAll();
+    public List<Status> getAll() {
+        return statusService.getAll();
     }
 
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/{id}")
-    public HistoryReimburse getById(@PathVariable Integer id) {
-        return historyReimburseService.getById(id);
+    public Status getById(@PathVariable Integer id) {
+        return statusService.getById(id);
     }
-
-    // @PostMapping
-    // public HistoryReimburse create(@RequestBody HistoryReimburse historyReimburse) {
-    //     return historyReimburseService.create(historyReimburse);
-    // }
 
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
-    public HistoryReimburse create(@RequestBody HistoryReimburse historyReimburse) {
-        return historyReimburseService.create(historyReimburse);
+    public Status create(@RequestBody Status status) {
+        return statusService.create(status);
     }
 
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PutMapping("/{id}")
-    public HistoryReimburse update(
+    public Status update(
             @PathVariable Integer id,
-            @RequestBody HistoryReimburse historyReimburse) {
-        return historyReimburseService.update(id, historyReimburse);
+            @RequestBody Status status) {
+        return statusService.update(id, status);
     }
 
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")
     @DeleteMapping("/{id}")
-    public HistoryReimburse delete(@PathVariable Integer id) {
-        return historyReimburseService.delete(id);
+    public Status delete(@PathVariable Integer id) {
+        return statusService.delete(id);
     }
 }

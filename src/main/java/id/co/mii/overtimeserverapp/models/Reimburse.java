@@ -39,9 +39,6 @@ public class Reimburse {
     @Column(name = "date_time", nullable = false)
     private LocalDateTime date_time;
 
-    @Column(name = "status", nullable = false)
-    private String status;
-
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
     private Employee employee;
@@ -49,6 +46,10 @@ public class Reimburse {
     @ManyToOne
     @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
     private Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
+    private Status status;
 
     @OneToMany(mappedBy="reimburse")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
