@@ -6,7 +6,9 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import id.co.mii.overtimeserverapp.models.Employee;
 import id.co.mii.overtimeserverapp.models.HistoryReimburse;
@@ -24,6 +26,7 @@ public class ReimburseService {
     private TypeService typeService;
     private StatusService statusService;
     private HistoryReimburseService historyReimburseService;
+    private FileStorageService fileStorageService;
     private ModelMapper modelMapper;
 
     public List<Reimburse> getAll() {
@@ -42,20 +45,26 @@ public class ReimburseService {
     // return reimburseRepository.save(reimburse);
     // }
 
-    public Reimburse create(ReimburseRequest reimburseRequest) {
+    public Reimburse create(ReimburseRequest reimburseRequest, MultipartFile file) {
         Reimburse reimburse = modelMapper.map(reimburseRequest, Reimburse.class);
+        String fileName = fileStorageService.storeFile(file);
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(fileName)
+                .toUriString();
+        reimburse.setFile_url(fileDownloadUri);
         reimburse.setDate_time(LocalDateTime.now());
         reimburse.setStatus(statusService.getById(1));
         reimburse.setEmployee(employeeService.getById(reimburseRequest.getEmployee_id()));
         reimburse.setType(typeService.getById(reimburseRequest.getType_id()));
-
+        reimburse = reimburseRepository.save(reimburse);
         HistoryReimburse historyReimburse = new HistoryReimburse();
         historyReimburse.setDate_time(LocalDateTime.now());
         historyReimburse.setStatus(reimburse.getStatus().getName());
         historyReimburse.setReimburse(reimburse);
         historyReimburse.setDescription("username");
         historyReimburseService.create(historyReimburse);
-        return reimburseRepository.save(reimburse);
+        return reimburse;
     }
 
     public Reimburse update(Integer id, Reimburse reimburse) {
@@ -69,19 +78,19 @@ public class ReimburseService {
         historyReimburse.setDescription("username");
         historyReimburseService.create(historyReimburse);
 
-        if (reimburse.getStatus().getId()==3) {
+        if (reimburse.getStatus().getId() == 3) {
             Employee employee = reimburse.getEmployee();
-            int newPayroll = (int)(employee.getPayroll()+reimburse.getNominal());
-            employee.setPayroll(newPayroll);
-            employeeService.update(employee.getId(), employee);
-        } 
-        if (reimburse.getStatus().getId()==4) {
-            Employee employee = reimburse.getEmployee();
-            int newPayroll = (int)(employee.getPayroll()-reimburse.getNominal());
+            int newPayroll = (int) (employee.getPayroll() + reimburse.getNominal());
             employee.setPayroll(newPayroll);
             employeeService.update(employee.getId(), employee);
         }
-        
+        if (reimburse.getStatus().getId() == 4) {
+            Employee employee = reimburse.getEmployee();
+            int newPayroll = (int) (employee.getPayroll() - reimburse.getNominal());
+            employee.setPayroll(newPayroll);
+            employeeService.update(employee.getId(), employee);
+        }
+
         return reimburseRepository.save(reimburse);
     }
 

@@ -31,13 +31,16 @@ public class Reimburse {
     private Integer id;
 
     @Column(name = "nominal", nullable = false)
-    private int nominal;
+    private Integer nominal;
 
     @Column(name = "description", nullable = false)
     private String description;
 
     @Column(name = "date_time", nullable = false)
     private LocalDateTime date_time;
+
+    @Column(name = "file_url")
+    private String file_url;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)

@@ -20,10 +20,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import id.co.mii.overtimeserverapp.models.Reimburse;
 import id.co.mii.overtimeserverapp.models.dto.requests.ReimburseRequest;
@@ -60,8 +58,8 @@ public class ReimburseController {
 
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
-    public Reimburse create(@RequestBody ReimburseRequest reimburseRequest) {
-        return reimburseService.create(reimburseRequest);
+    public Reimburse create(ReimburseRequest reimburseRequest, @RequestParam MultipartFile file) {
+        return reimburseService.create(reimburseRequest, file);
     }
 
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
