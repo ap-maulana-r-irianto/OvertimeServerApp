@@ -47,17 +47,25 @@ public class Employee {
     @Column(name = "payroll", nullable = false)
     private int payroll;
 
+    @OneToMany(mappedBy="manager")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Employee> managerTop;
+
+    @ManyToOne
+    @JoinColumn(name = "manager_id", referencedColumnName = "id")
+    private Employee manager;
+
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
     @OneToMany(mappedBy="manager")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<Employee> manager;
+    private List<Department> managerDept;
 
     @OneToMany(mappedBy="hr")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<Employee> hr;
+    private List<Department> hr;
 
     @OneToOne(mappedBy = "employee")
     @PrimaryKeyJoinColumn
