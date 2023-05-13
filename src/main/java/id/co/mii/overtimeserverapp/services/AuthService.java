@@ -90,9 +90,9 @@ public class AuthService {
                 user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
                 // set Role
-                // List<Role> roles = new ArrayList<>();
-                // roles.add(roleService.getById(1));
-                // user.setRoles(roles);
+                List<Role> roles = new ArrayList<>();
+                roles.add(roleService.getById(userRequest.getRole_id()));
+                user.setRole(roles);
 
                 employee.setUser(user);
                 user.setEmployee(employee);

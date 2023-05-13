@@ -47,6 +47,9 @@ public class Employee {
     @Column(name = "payroll", nullable = false)
     private int payroll;
 
+    @Column(name = "account_bank")
+    private String account_bank;
+
     @OneToMany(mappedBy="manager")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Employee> managerTop;
