@@ -97,7 +97,7 @@ public class AuthService {
                 employee.setUser(user);
                 user.setEmployee(employee);
 
-                emailService.sendSimpleMail(userRequest);
+                emailService.sendMailAccount(userRequest);
 
                 return userRepository.save(user);
         }

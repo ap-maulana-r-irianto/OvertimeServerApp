@@ -27,6 +27,7 @@ public class ReimburseService {
     private StatusService statusService;
     private HistoryReimburseService historyReimburseService;
     private FileStorageService fileStorageService;
+    private EmailService emailService;
     private ModelMapper modelMapper;
 
     public List<Reimburse> getAll() {
@@ -89,6 +90,7 @@ public class ReimburseService {
             int newPayroll = (int) (employee.getPayroll() - reimburse.getNominal());
             employee.setPayroll(newPayroll);
             employeeService.update(employee.getId(), employee);
+            emailService.sendMailReimbursePaid(reimburse);
         }
 
         return reimburseRepository.save(reimburse);

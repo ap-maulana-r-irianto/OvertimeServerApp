@@ -28,6 +28,7 @@ public class OvertimeService {
     private HistoryOvertimeService historyOvertimeService;
     private ProjectService projectService;
     private EmployeeService employeeService;
+    private EmailService emailService;
     private ModelMapper modelMapper;
 
     public List<Overtime> getAll() {
@@ -92,6 +93,7 @@ public class OvertimeService {
             int newPayroll = (int)(employee.getPayroll()-(time.toMinutes()*1000));
             employee.setPayroll(newPayroll);
             employeeService.update(employee.getId(), employee);
+            emailService.sendMailOvertimePaid(overtime);
         }
         return overtimeRepository.save(overtime);
     }
