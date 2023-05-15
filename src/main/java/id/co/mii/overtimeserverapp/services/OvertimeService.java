@@ -51,6 +51,9 @@ public class OvertimeService {
         Overtime overtime = modelMapper.map(overtimeRequest, Overtime.class);
         overtime.setStatus(statusService.getById(1));
         overtime.setEmployeeProject(employeeProjectService.getById(overtimeRequest.getEmployee_project_id()));
+        Duration time = Duration.between(overtime.getEnd_time(), overtime.getStart_time());
+        int nominal = (int)((time.toMinutes()*1000)*(-1));
+        overtime.setNominal(nominal);
         overtime = overtimeRepository.save(overtime);
         HistoryOvertime historyOvertime = new HistoryOvertime();
         historyOvertime.setDate_time(LocalDateTime.now());

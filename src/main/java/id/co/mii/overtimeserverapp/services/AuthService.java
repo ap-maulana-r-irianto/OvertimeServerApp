@@ -32,6 +32,8 @@ public class AuthService {
         private ModelMapper modelMapper;
         private PasswordEncoder passwordEncoder;
         private RoleService roleService;
+        private EmployeeService employeeService;
+        private DepartmentService departmentService;
         private EmailService emailService;
 
         public LoginResponse login(LoginRequest loginRequest) {
@@ -96,6 +98,13 @@ public class AuthService {
 
                 employee.setUser(user);
                 user.setEmployee(employee);
+
+                if (userRequest.getDepartment_id() != null) {
+                        employee.setDepartment(departmentService.getById(userRequest.getDepartment_id()));
+                }
+                if (userRequest.getManager_id() != null) {
+                        employee.setManager(employeeService.getById(userRequest.getManager_id()));
+                }
 
                 emailService.sendMailAccount(userRequest);
 
