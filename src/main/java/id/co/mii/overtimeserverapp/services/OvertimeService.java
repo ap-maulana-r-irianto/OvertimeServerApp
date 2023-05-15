@@ -31,10 +31,12 @@ public class OvertimeService {
     private EmailService emailService;
     private ModelMapper modelMapper;
 
+    //method untuk menampilkan semua data Overtime 
     public List<Overtime> getAll() {
         return overtimeRepository.findAll();
     }
 
+    //method untuk menampilkan data Overtime berdasarkan id
     public Overtime getById(Integer id) {
         return overtimeRepository
                 .findById(id)
@@ -47,6 +49,7 @@ public class OvertimeService {
     //     return overtimeRepository.save(overtime);
     // }
 
+    //method untuk (create) menambahkan data Overtime
     public Overtime create(OvertimeRequest overtimeRequest) {
         Overtime overtime = modelMapper.map(overtimeRequest, Overtime.class);
         overtime.setStatus(statusService.getById(1));
@@ -64,6 +67,7 @@ public class OvertimeService {
         return overtime;
     }
 
+    //method untuk (update) mengupdate data Overtime
     public Overtime update(Integer id, Overtime overtime) {
         getById(id); // method getById
         overtime.setId(id);
@@ -101,6 +105,7 @@ public class OvertimeService {
         return overtimeRepository.save(overtime);
     }
 
+    //method untuk (delete) menghapus data Overtime
     public Overtime delete(Integer id) {
         Overtime overtime = getById(id);
         overtimeRepository.delete(overtime);

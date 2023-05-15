@@ -25,12 +25,14 @@ public class DepartmentController {
     
     private DepartmentService departmentService;
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping
     public List<Department> getAll() {
         return departmentService.getAll();
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/get/{id}"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/{id}")
     public Department getById(@PathVariable Integer id) {
@@ -42,12 +44,14 @@ public class DepartmentController {
     //     return departmentService.create(department);
     // }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public Department create(@RequestBody DepartmentRequest departmentRequest) {
         return departmentService.create(departmentRequest);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update/{id}"
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PutMapping("/{id}")
     public Department update(
@@ -56,6 +60,7 @@ public class DepartmentController {
         return departmentService.update(id, department);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete/{id}"
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")
     @DeleteMapping("/{id}")
     public Department delete(@PathVariable Integer id) {

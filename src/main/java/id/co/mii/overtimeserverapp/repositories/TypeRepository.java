@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.Type;
 public interface TypeRepository extends JpaRepository<Type, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Type ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

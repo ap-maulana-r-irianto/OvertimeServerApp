@@ -16,10 +16,12 @@ public class StatusService {
     
     private StatusRepository statusRepository;
 
+    //method untuk menampilkan semua data Status
     public List<Status> getAll() {
         return statusRepository.findAll();
     }
 
+    //method untuk menampilkan data Status berdasarkan id
     public Status getById(Integer id) {
         return statusRepository
                 .findById(id)
@@ -28,16 +30,19 @@ public class StatusService {
                         "Status not found!!"));
     }
 
+    //method untuk menambah data Status
     public Status create(Status status) {
         return statusRepository.save(status);
     }
 
+    //method untuk mengubah data Status
     public Status update(Integer id, Status status) {
         getById(id); // method getById
         status.setId(id);
         return statusRepository.save(status);
     }
 
+    //method untuk menghapus data Status
     public Status delete(Integer id) {
         Status status = getById(id);
         statusRepository.delete(status);

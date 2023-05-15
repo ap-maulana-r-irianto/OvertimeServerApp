@@ -24,24 +24,28 @@ public class StatusController {
     
     private StatusService statusService;
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping
     public List<Status> getAll() {
         return statusService.getAll();
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/{id}")
     public Status getById(@PathVariable Integer id) {
         return statusService.getById(id);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public Status create(@RequestBody Status status) {
         return statusService.create(status);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update"
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PutMapping("/{id}")
     public Status update(
@@ -50,6 +54,7 @@ public class StatusController {
         return statusService.update(id, status);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete"
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")
     @DeleteMapping("/{id}")
     public Status delete(@PathVariable Integer id) {

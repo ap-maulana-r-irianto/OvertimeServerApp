@@ -24,24 +24,28 @@ public class RoleController {
     
     private RoleService roleService;
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping
     public List<Role> getAll() {
         return roleService.getAll();
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById/{id}"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/{id}")
     public Role getById(@PathVariable Integer id) {
         return roleService.getById(id);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public Role create(@RequestBody Role role) {
         return roleService.create(role);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update"
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PutMapping("/{id}")
     public Role update(
@@ -50,6 +54,7 @@ public class RoleController {
         return roleService.update(id, role);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete/{id}"
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")
     @DeleteMapping("/{id}")
     public Role delete(@PathVariable Integer id) {

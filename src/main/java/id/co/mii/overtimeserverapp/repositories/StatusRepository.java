@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.Status;
 public interface StatusRepository extends JpaRepository<Status, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Status ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

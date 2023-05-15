@@ -8,3 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Employee ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

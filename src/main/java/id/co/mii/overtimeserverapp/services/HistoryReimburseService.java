@@ -16,10 +16,12 @@ public class HistoryReimburseService {
     
     private HistoryReimburseRepository historyReimburseRepository;
 
+    //method untuk menampilkan semua data History Reimburse
     public List<HistoryReimburse> getAll() {
         return historyReimburseRepository.findAll();
     }
 
+    //method untuk menampilkan data History Reimburse berdasarkan id
     public HistoryReimburse getById(Integer id) {
         return historyReimburseRepository
                 .findById(id)
@@ -32,16 +34,19 @@ public class HistoryReimburseService {
     //     return historyReimburseRepository.save(historyReimburse);
     // }
 
+    //method untuk (create) menambahkan data History Reimburse
     public HistoryReimburse create(HistoryReimburse historyReimburse) {
         return historyReimburseRepository.save(historyReimburse);
     }
 
+    //method untuk (update) mengubah data History Reimburese
     public HistoryReimburse update(Integer id, HistoryReimburse historyReimburse) {
         getById(id); // method getById
         historyReimburse.setId(id);
         return historyReimburseRepository.save(historyReimburse);
     }
 
+    //method untuk (delete) menghapus data History Reimburse
     public HistoryReimburse delete(Integer id) {
         HistoryReimburse employee = getById(id);
         historyReimburseRepository.delete(employee);

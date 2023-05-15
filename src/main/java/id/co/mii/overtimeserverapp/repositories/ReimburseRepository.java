@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.Reimburse;
 public interface ReimburseRepository extends JpaRepository<Reimburse, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data reimburse ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

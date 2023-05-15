@@ -25,12 +25,14 @@ public class OvertimeController {
     
     private OvertimeService overtimeService;
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping
     public List<Overtime> getAll() {
         return overtimeService.getAll();
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById/{id}"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/{id}")
     public Overtime getById(@PathVariable Integer id) {
@@ -42,12 +44,14 @@ public class OvertimeController {
     //     return overtimeService.create(overtime);
     // }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public Overtime create(@RequestBody OvertimeRequest overtimeRequest) {
         return overtimeService.create(overtimeRequest);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update/{id}"
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PutMapping("/{id}")
     public Overtime update(
@@ -56,6 +60,7 @@ public class OvertimeController {
         return overtimeService.update(id, overtime);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete/{id}"
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")
     @DeleteMapping("/{id}")
     public Overtime delete(@PathVariable Integer id) {

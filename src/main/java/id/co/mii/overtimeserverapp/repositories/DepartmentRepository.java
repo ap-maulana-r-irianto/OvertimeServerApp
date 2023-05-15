@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.Department;
 public interface DepartmentRepository extends JpaRepository<Department, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Department ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

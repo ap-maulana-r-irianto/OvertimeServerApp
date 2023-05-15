@@ -39,12 +39,14 @@ public class ReimburseController {
     private FileStorageService fileStorageService;
     private static final Logger logger = LoggerFactory.getLogger(ReimburseController.class);
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping
     public List<Reimburse> getAll() {
         return reimburseService.getAll();
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById/{id}"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/{id}")
     public Reimburse getById(@PathVariable Integer id) {
@@ -56,12 +58,14 @@ public class ReimburseController {
     //     return reimburseService.create(reimburse);
     // }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/create"
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public Reimburse create(ReimburseRequest reimburseRequest, @RequestParam MultipartFile file) {
         return reimburseService.create(reimburseRequest, file);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update"
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PutMapping("/{id}")
     public Reimburse update(
@@ -70,6 +74,7 @@ public class ReimburseController {
         return reimburseService.update(id, reimburse);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete/{id}"
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")
     @DeleteMapping("/{id}")
     public Reimburse delete(@PathVariable Integer id) {

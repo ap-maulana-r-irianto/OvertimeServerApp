@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.Role;
 public interface RoleRepository extends JpaRepository<Role, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Role ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

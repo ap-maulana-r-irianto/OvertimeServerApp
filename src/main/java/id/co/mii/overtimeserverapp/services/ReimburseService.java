@@ -30,10 +30,12 @@ public class ReimburseService {
     private EmailService emailService;
     private ModelMapper modelMapper;
 
+    //method untuk menampilkan semua data Reimburse
     public List<Reimburse> getAll() {
         return reimburseRepository.findAll();
     }
 
+    //method untuk menampilkan data Reimburse berdasarkan id
     public Reimburse getById(Integer id) {
         return reimburseRepository
                 .findById(id)
@@ -46,6 +48,7 @@ public class ReimburseService {
     // return reimburseRepository.save(reimburse);
     // }
 
+    //method untuk (create) menambahkan data Reimburse
     public Reimburse create(ReimburseRequest reimburseRequest, MultipartFile file) {
         Reimburse reimburse = modelMapper.map(reimburseRequest, Reimburse.class);
         String fileName = fileStorageService.storeFile(file);
@@ -68,6 +71,7 @@ public class ReimburseService {
         return reimburse;
     }
 
+    //method untuk (update) mengubah data Reimburse
     public Reimburse update(Integer id, Reimburse reimburse) {
         getById(id); // method getById
         reimburse.setId(id);
@@ -96,6 +100,7 @@ public class ReimburseService {
         return reimburseRepository.save(reimburse);
     }
 
+    //method untuk (delete) menghapus data Reimburse
     public Reimburse delete(Integer id) {
         Reimburse reimburse = getById(id);
         reimburseRepository.delete(reimburse);
