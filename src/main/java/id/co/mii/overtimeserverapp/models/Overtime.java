@@ -43,11 +43,11 @@ public class Overtime {
     private LocalDateTime end_time;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     @ManyToOne
-    @JoinColumn(name = "employee_project_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "employee_project_id", referencedColumnName = "id")
     private EmployeeProject employeeProject;
 
     @OneToMany(mappedBy="overtime")

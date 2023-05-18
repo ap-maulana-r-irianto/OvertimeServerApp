@@ -41,13 +41,10 @@ public class Employee {
     @Column(unique = true, name = "email", nullable = false)
     private String email;
 
-    @Column(name = "status", nullable = false)
-    private Boolean status = true;
-
     @Column(name = "payroll", nullable = false)
     private int payroll;
 
-    @Column(name = "account_bank")
+    @Column(name = "account_bank", nullable = false)
     private String account_bank;
 
     @OneToMany(mappedBy="manager")
@@ -62,9 +59,9 @@ public class Employee {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
-    @OneToMany(mappedBy="manager")
+    @OneToOne(mappedBy = "manager")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<Department> managerDept;
+    private Department managerDept;
 
     @OneToMany(mappedBy="hr")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

@@ -17,17 +17,17 @@ public class AppUserDetail implements UserDetails {
   public Collection<? extends GrantedAuthority> getAuthorities() {
     List<GrantedAuthority> authorities = new ArrayList<>();
     user
-      .getRole()
-      .forEach(role -> {
-        String roleName = "ROLE_" + role.getName().toUpperCase();
-        authorities.add(new SimpleGrantedAuthority(roleName));
-        role
-          .getPrivilege()
-          .forEach(privilege -> {
-            String privilegeName = privilege.getName().toUpperCase();
-            authorities.add(new SimpleGrantedAuthority(privilegeName));
-          });
-      });
+        .getRole()
+        .forEach(role -> {
+          String roleName = "ROLE_" + role.getName().toUpperCase();
+          authorities.add(new SimpleGrantedAuthority(roleName));
+          role
+              .getPrivilege()
+              .forEach(privilege -> {
+                String privilegeName = privilege.getName().toUpperCase();
+                authorities.add(new SimpleGrantedAuthority(privilegeName));
+              });
+        });
     return authorities;
   }
 
@@ -60,4 +60,5 @@ public class AppUserDetail implements UserDetails {
   public boolean isEnabled() {
     return user.getIsEnabled();
   }
+
 }

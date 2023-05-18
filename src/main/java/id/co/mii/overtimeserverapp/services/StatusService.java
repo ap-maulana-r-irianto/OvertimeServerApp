@@ -28,6 +28,10 @@ public class StatusService {
                         "Status not found!!"));
     }
 
+    public Status getByName(String name) {
+        return statusRepository.findByName(name);
+    }
+
     public Status create(Status status) {
         return statusRepository.save(status);
     }

@@ -10,4 +10,5 @@ import id.co.mii.overtimeserverapp.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByUsernameOrEmployee_Email(String username, String email);
+    User findByUsername(String name);
 }

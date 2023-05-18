@@ -28,6 +28,10 @@ public class RoleService {
                         "Role not found!!"));
     }
 
+    public Role getByName(String name) {
+        return roleRepository.findByName(name);
+    }
+
     public Role create(Role role) {
         return roleRepository.save(role);
     }

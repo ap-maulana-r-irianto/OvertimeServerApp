@@ -36,6 +36,12 @@ public class RoleController {
         return roleService.getById(id);
     }
 
+    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    @GetMapping("/name/{name}")
+    public Role getByName(@PathVariable String name) {
+        return roleService.getByName(name);
+    }
+
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public Role create(@RequestBody Role role) {

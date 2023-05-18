@@ -58,8 +58,8 @@ public class ReimburseController {
 
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
-    public Reimburse create(ReimburseRequest reimburseRequest, @RequestParam MultipartFile file) {
-        return reimburseService.create(reimburseRequest, file);
+    public Reimburse create(@RequestBody ReimburseRequest reimburseRequest) {
+        return reimburseService.create(reimburseRequest);
     }
 
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
@@ -68,6 +68,43 @@ public class ReimburseController {
             @PathVariable Integer id,
             @RequestBody Reimburse reimburse) {
         return reimburseService.update(id, reimburse);
+    }
+
+    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PutMapping("/approv/manager/{id}")
+    public Reimburse approvManager(
+            @PathVariable Integer id) {
+        return reimburseService.approvManager(id);
+    }
+
+    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PutMapping("/approv/hr/{id}")
+    public Reimburse approvHr(
+            @PathVariable Integer id) {
+        return reimburseService.approvHr(id);
+    }
+
+    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PutMapping("/reject/manager/{id}")
+    public Reimburse rejectManager(
+            @PathVariable Integer id,
+            @RequestBody String description) {
+        return reimburseService.rejectManager(id, description);
+    }
+
+    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PutMapping("/reject/hr/{id}")
+    public Reimburse rejectHr(
+            @PathVariable Integer id,
+            @RequestBody String description) {
+        return reimburseService.rejectHr(id, description);
+    }
+
+    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PutMapping("/paid/{id}")
+    public Reimburse paid(
+            @PathVariable Integer id) {
+        return reimburseService.paid(id);
     }
 
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")

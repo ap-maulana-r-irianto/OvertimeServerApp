@@ -46,14 +46,8 @@ public class ReimburseService {
     // return reimburseRepository.save(reimburse);
     // }
 
-    public Reimburse create(ReimburseRequest reimburseRequest, MultipartFile file) {
+    public Reimburse create(ReimburseRequest reimburseRequest) {
         Reimburse reimburse = modelMapper.map(reimburseRequest, Reimburse.class);
-        String fileName = fileStorageService.storeFile(file);
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName)
-                .toUriString();
-        reimburse.setFile_url(fileDownloadUri);
         reimburse.setDate_time(LocalDateTime.now());
         reimburse.setStatus(statusService.getById(1));
         reimburse.setEmployee(employeeService.getById(reimburseRequest.getEmployee_id()));
@@ -71,29 +65,95 @@ public class ReimburseService {
     public Reimburse update(Integer id, Reimburse reimburse) {
         getById(id); // method getById
         reimburse.setId(id);
-
+        reimburse.setDate_time(LocalDateTime.now());
+        reimburse.setType(reimburse.getType());
+        reimburse = reimburseRepository.save(reimburse);
         HistoryReimburse historyReimburse = new HistoryReimburse();
         historyReimburse.setDate_time(LocalDateTime.now());
         historyReimburse.setStatus(reimburse.getStatus().getName());
         historyReimburse.setReimburse(reimburse);
-        historyReimburse.setDescription("username");
+        historyReimburse.setDescription(reimburse.getDescription());
         historyReimburseService.create(historyReimburse);
+        return reimburse;
+    }
 
-        if (reimburse.getStatus().getId() == 3) {
-            Employee employee = reimburse.getEmployee();
-            int newPayroll = (int) (employee.getPayroll() + reimburse.getNominal());
-            employee.setPayroll(newPayroll);
-            employeeService.update(employee.getId(), employee);
-        }
-        if (reimburse.getStatus().getId() == 4) {
-            Employee employee = reimburse.getEmployee();
-            int newPayroll = (int) (employee.getPayroll() - reimburse.getNominal());
-            employee.setPayroll(newPayroll);
-            employeeService.update(employee.getId(), employee);
-            emailService.sendMailReimbursePaid(reimburse);
-        }
+    public Reimburse approvManager(Integer id) {
+        getById(id); // method getById
+        Reimburse reimburse = getById(id);
+        reimburse.setStatus(statusService.getByName("approv by manager"));
+        reimburse = reimburseRepository.save(reimburse);
+        HistoryReimburse historyReimburse = new HistoryReimburse();
+        historyReimburse.setDate_time(LocalDateTime.now());
+        historyReimburse.setStatus(reimburse.getStatus().getName());
+        historyReimburse.setReimburse(reimburse);
+        historyReimburse.setDescription("approv");
+        historyReimburseService.create(historyReimburse);
+        return reimburse;
+    }
 
-        return reimburseRepository.save(reimburse);
+    public Reimburse rejectManager(Integer id, String description) {
+        getById(id); // method getById
+        Reimburse reimburse = getById(id);
+        reimburse.setStatus(statusService.getByName("reject by manager"));
+        reimburse = reimburseRepository.save(reimburse);
+        HistoryReimburse historyReimburse = new HistoryReimburse();
+        historyReimburse.setDate_time(LocalDateTime.now());
+        historyReimburse.setStatus(reimburse.getStatus().getName());
+        historyReimburse.setReimburse(reimburse);
+        historyReimburse.setDescription(description);
+        historyReimburseService.create(historyReimburse);
+        return reimburse;
+    }
+
+    public Reimburse approvHr(Integer id) {
+        getById(id); // method getById
+        Reimburse reimburse = getById(id);
+        reimburse.setStatus(statusService.getByName("approv by hr"));
+        reimburse = reimburseRepository.save(reimburse);
+        HistoryReimburse historyReimburse = new HistoryReimburse();
+        historyReimburse.setDate_time(LocalDateTime.now());
+        historyReimburse.setStatus(reimburse.getStatus().getName());
+        historyReimburse.setReimburse(reimburse);
+        historyReimburse.setDescription("approv");
+        historyReimburseService.create(historyReimburse);
+        Employee employee = reimburse.getEmployee();
+        int newPayroll = (int) (employee.getPayroll() + reimburse.getNominal());
+        employee.setPayroll(newPayroll);
+        employeeService.update(employee.getId(), employee);
+        return reimburse;
+    }
+
+    public Reimburse rejectHr(Integer id, String description) {
+        getById(id); // method getById
+        Reimburse reimburse = getById(id);
+        reimburse.setStatus(statusService.getByName("reject by hr"));
+        reimburse = reimburseRepository.save(reimburse);
+        HistoryReimburse historyReimburse = new HistoryReimburse();
+        historyReimburse.setDate_time(LocalDateTime.now());
+        historyReimburse.setStatus(reimburse.getStatus().getName());
+        historyReimburse.setReimburse(reimburse);
+        historyReimburse.setDescription(description);
+        historyReimburseService.create(historyReimburse);
+        return reimburse;
+    }
+
+    public Reimburse paid(Integer id) {
+        getById(id); // method getById
+        Reimburse reimburse = getById(id);
+        reimburse.setStatus(statusService.getByName("paid"));
+        reimburse = reimburseRepository.save(reimburse);
+        HistoryReimburse historyReimburse = new HistoryReimburse();
+        historyReimburse.setDate_time(LocalDateTime.now());
+        historyReimburse.setStatus(reimburse.getStatus().getName());
+        historyReimburse.setReimburse(reimburse);
+        historyReimburse.setDescription("paid");
+        historyReimburseService.create(historyReimburse);
+        Employee employee = reimburse.getEmployee();
+        int newPayroll = (int) (employee.getPayroll() - reimburse.getNominal());
+        employee.setPayroll(newPayroll);
+        employeeService.update(employee.getId(), employee);
+        emailService.sendMailReimbursePaid(reimburse);
+        return reimburse;
     }
 
     public Reimburse delete(Integer id) {

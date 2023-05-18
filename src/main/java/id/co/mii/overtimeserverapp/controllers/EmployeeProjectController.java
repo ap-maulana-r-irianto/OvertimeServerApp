@@ -38,8 +38,8 @@ public class EmployeeProjectController {
 
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
-    public EmployeeProject create(@RequestBody EmployeeProjectRequest employeeProjectRequest) {
-        return employeeProjectService.create(employeeProjectRequest);
+    public EmployeeProject create(@RequestBody EmployeeProject employeeProject) {
+        return employeeProjectService.create(employeeProject);
     }
 
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")

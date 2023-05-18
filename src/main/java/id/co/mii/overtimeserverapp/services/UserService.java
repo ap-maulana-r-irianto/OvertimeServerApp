@@ -3,6 +3,7 @@ package id.co.mii.overtimeserverapp.services;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,6 +18,7 @@ public class UserService {
 
     private UserRepository userRepository;
     private RoleService roleService;
+    private PasswordEncoder passwordEncoder;
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -30,6 +32,10 @@ public class UserService {
                         "Role not found!!"));
     }
 
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public User create(User user) {
         return userRepository.save(user);
     }
@@ -37,6 +43,7 @@ public class UserService {
     public User update(Integer id, User user) {
         getById(id); // method getById
         user.setId(id);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

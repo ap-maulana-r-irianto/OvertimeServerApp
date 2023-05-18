@@ -39,19 +39,19 @@ public class Reimburse {
     @Column(name = "date_time", nullable = false)
     private LocalDateTime date_time;
 
-    @Column(name = "file_url")
+    @Column(name = "file_url", nullable = false)
     private String file_url;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
     private Type type;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     @OneToMany(mappedBy="reimburse")

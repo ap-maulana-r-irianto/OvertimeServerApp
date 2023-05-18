@@ -37,6 +37,12 @@ public class UserController {
         return userService.getById(id);
     }
 
+    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    @GetMapping("/username/{username}")
+    public User getByUsername(@PathVariable String username) {
+        return userService.getByUsername(username);
+    }
+
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public User create(@RequestBody User user) {
