@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.Project;
 public interface ProjectRepository extends JpaRepository<Project, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Project ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

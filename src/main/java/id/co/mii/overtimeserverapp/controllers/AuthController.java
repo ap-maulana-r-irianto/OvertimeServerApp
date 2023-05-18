@@ -17,24 +17,22 @@ public class AuthController {
 
     private AuthService authService;
 
+    //method yang digunakan untuk menerima HTTP POST request pada endpoint "/login"
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         return authService.login(loginRequest);
     }
 
+    //method yang digunakan untuk menerima HTTP POST request pada endpoint "/register"
     @PostMapping("/register")
     public User register(@RequestBody UserRequest userRequest) {
         return authService.register(userRequest);
     }
 
+    //method yang digunakan untuk menerima HTTP POST request pada endpoint "/create"
     @PostMapping("/create")
     public User create(@RequestBody UserRequest userRequest) {
         return authService.create(userRequest);
     }
 
-    // @PutMapping("/register/{id}")
-    // public User update(@PathVariable Integer id, @RequestBody UserRequest
-    // userRequest) {
-    // return authService.update(id, userRequest);
-    // }
 }

@@ -24,12 +24,14 @@ public class HistoryOvertimeController {
     
     private HistoryOvertimeService historyOvertimeService;
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping
     public List<HistoryOvertime> getAll() {
         return historyOvertimeService.getAll();
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById/{id}"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/{id}")
     public HistoryOvertime getById(@PathVariable Integer id) {
@@ -41,12 +43,14 @@ public class HistoryOvertimeController {
     //     return historyOvertimeService.create(historyOvertime);
     // }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public HistoryOvertime create(@RequestBody HistoryOvertime historyOvertime) {
         return historyOvertimeService.create(historyOvertime);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update/{id}"
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PutMapping("/{id}")
     public HistoryOvertime update(
@@ -55,6 +59,7 @@ public class HistoryOvertimeController {
         return historyOvertimeService.update(id, historyOvertime);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete/{id}"
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")
     @DeleteMapping("/{id}")
     public HistoryOvertime delete(@PathVariable Integer id) {

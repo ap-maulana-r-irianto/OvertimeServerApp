@@ -25,12 +25,14 @@ public class UserController {
 
     private UserService userService;
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping
     public List<User> getAll() {
         return userService.getAll();
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById"
     @PreAuthorize("hasAuthority('READ_ADMIN')")
     @GetMapping("/{id}")
     public User getById(@PathVariable Integer id) {
@@ -43,12 +45,14 @@ public class UserController {
         return userService.getByUsername(username);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping
     public User create(@RequestBody User user) {
         return userService.create(user);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update"
     @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
     @PutMapping("/{id}")
     public User update(
@@ -57,12 +61,14 @@ public class UserController {
         return userService.update(id, user);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete"
     @PreAuthorize("hasAuthority('DELETE_ADMIN')")
     @DeleteMapping("/{id}")
     public User delete(@PathVariable Integer id) {
         return userService.delete(id);
     }
 
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/addRole"
     @PreAuthorize("hasAuthority('CREATE_ADMIN')")
     @PostMapping("/{id}")
     public User addRole(@PathVariable Integer id, @RequestBody Role role) {

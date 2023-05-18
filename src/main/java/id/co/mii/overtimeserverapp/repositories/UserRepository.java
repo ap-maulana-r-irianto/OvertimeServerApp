@@ -12,3 +12,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findByUsernameOrEmployee_Email(String username, String email);
     User findByUsername(String name);
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data User ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

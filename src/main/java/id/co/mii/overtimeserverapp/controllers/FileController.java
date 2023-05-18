@@ -30,9 +30,6 @@ public class FileController {
     @Autowired
     private FileStorageService fileStorageService;
 
-    // @Autowired
-    // private FileService fileService;
-
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
@@ -45,19 +42,6 @@ public class FileController {
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
-
-    // @PostMapping("/uploadFile")
-    // public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-    //     File files = fileService.storeFile(file);
-
-    //     String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-    //             .path("/downloadFile/")
-    //             .path(files.getFile_name())
-    //             .toUriString();
-
-    //     return new UploadFileResponse(files.getFile_name(), fileDownloadUri,
-    //             file.getContentType(), file.getSize());
-    // }
 
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
@@ -83,14 +67,4 @@ public class FileController {
                 .body(resource);
     }
 
-    // @GetMapping("/downloadFile/{fileId}")
-    // public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
-    //     // Load file from database
-    //     File file = fileService.getFile(fileId);
-
-    //     return ResponseEntity.ok()
-    //             .contentType(MediaType.parseMediaType(file.getFile_type()))
-    //             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFile_name() + "\"")
-    //             .body(new ByteArrayResource(file.getData()));
-    // }
 }

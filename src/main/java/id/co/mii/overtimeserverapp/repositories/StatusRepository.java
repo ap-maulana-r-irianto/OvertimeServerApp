@@ -11,3 +11,6 @@ import java.util.List;
 public interface StatusRepository extends JpaRepository<Status, Integer>{
     Status findByName(String name);
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Status ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

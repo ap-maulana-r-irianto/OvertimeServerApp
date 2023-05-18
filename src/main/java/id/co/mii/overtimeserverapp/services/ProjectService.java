@@ -16,10 +16,12 @@ public class ProjectService {
 
     private ProjectRepository projectRepository;
 
+    //method untuk menampilkan semua data Project
     public List<Project> getAll() {
         return projectRepository.findAll();
     }
 
+    //method untuk menampilkan data Project berdasarkan id
     public Project getById(Integer id) {
         return projectRepository
                 .findById(id)
@@ -28,16 +30,19 @@ public class ProjectService {
                         "Project not found!!"));
     }
 
+    //method untuk menambah data Project
     public Project create(Project project) {
         return projectRepository.save(project);
     }
 
+    //method untuk mengubah data Project
     public Project update(Integer id, Project project) {
         getById(id); // method getById
         project.setId(id);
         return projectRepository.save(project);
     }
 
+    //method untuk menghapus data Project
     public Project delete(Integer id) {
         Project project = getById(id);
         projectRepository.delete(project);

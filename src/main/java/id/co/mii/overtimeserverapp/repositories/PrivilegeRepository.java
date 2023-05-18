@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.Privilege;
 public interface PrivilegeRepository extends JpaRepository<Privilege, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Privilege ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

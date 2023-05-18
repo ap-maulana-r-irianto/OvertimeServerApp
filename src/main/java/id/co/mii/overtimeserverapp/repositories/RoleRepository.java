@@ -11,3 +11,6 @@ import java.util.List;
 public interface RoleRepository extends JpaRepository<Role, Integer>{
     Role findByName(String name);
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data Role ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

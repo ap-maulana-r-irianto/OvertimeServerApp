@@ -16,10 +16,12 @@ public class HistoryOvertimeService {
 
     private HistoryOvertimeRepository historyOvertimeRepository;
 
+    //method untuk menampilkan semua data History Overtime
     public List<HistoryOvertime> getAll() {
         return historyOvertimeRepository.findAll();
     }
 
+    //method untuk menampilkan data History Overtime berdasarkan id
     public HistoryOvertime getById(Integer id) {
         return historyOvertimeRepository
                 .findById(id)
@@ -32,16 +34,19 @@ public class HistoryOvertimeService {
     //     return historyOvertimeRepository.save(historyOvertime);
     // }
 
+    //method untuk (create) menambahkan data History Overtime
     public HistoryOvertime create(HistoryOvertime historyOvertime) {
         return historyOvertimeRepository.save(historyOvertime);
     }
 
+    //method untuk (update) mengubah data History Overtime
     public HistoryOvertime update(Integer id, HistoryOvertime historyOvertime) {
         getById(id); // method getById
         historyOvertime.setId(id);
         return historyOvertimeRepository.save(historyOvertime);
     }
 
+    //method untuk (delete) menghapus data History Overtime
     public HistoryOvertime delete(Integer id) {
         HistoryOvertime employee = getById(id);
         historyOvertimeRepository.delete(employee);

@@ -25,7 +25,7 @@ public class EmailService {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
 
             // Setting up necessary details
-            mailMessage.setFrom("maulanarafael@gmail.com");
+            mailMessage.setFrom("mcc76overtime@gmail.com");
             mailMessage.setTo(userRequest.getEmail());
             mailMessage
                     .setText("Hello " + userRequest.getName() + ",\n\nThis is your account on Overtime App\nUsername : "

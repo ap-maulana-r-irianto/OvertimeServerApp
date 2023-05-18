@@ -6,9 +6,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import id.co.mii.overtimeserverapp.models.Employee;
 import id.co.mii.overtimeserverapp.models.HistoryReimburse;
@@ -26,14 +24,15 @@ public class ReimburseService {
     private TypeService typeService;
     private StatusService statusService;
     private HistoryReimburseService historyReimburseService;
-    private FileStorageService fileStorageService;
     private EmailService emailService;
     private ModelMapper modelMapper;
 
+    //method untuk menampilkan semua data Reimburse
     public List<Reimburse> getAll() {
         return reimburseRepository.findAll();
     }
 
+    //method untuk menampilkan data Reimburse berdasarkan id
     public Reimburse getById(Integer id) {
         return reimburseRepository
                 .findById(id)
@@ -46,6 +45,7 @@ public class ReimburseService {
     // return reimburseRepository.save(reimburse);
     // }
 
+    //method untuk (create) menambahkan data Reimburse
     public Reimburse create(ReimburseRequest reimburseRequest) {
         Reimburse reimburse = modelMapper.map(reimburseRequest, Reimburse.class);
         reimburse.setDate_time(LocalDateTime.now());
@@ -62,6 +62,7 @@ public class ReimburseService {
         return reimburse;
     }
 
+    //method untuk (update) mengubah data Reimburse
     public Reimburse update(Integer id, Reimburse reimburse) {
         getById(id); // method getById
         reimburse.setId(id);
@@ -156,6 +157,7 @@ public class ReimburseService {
         return reimburse;
     }
 
+    //method untuk (delete) menghapus data Reimburse
     public Reimburse delete(Integer id) {
         Reimburse reimburse = getById(id);
         reimburseRepository.delete(reimburse);

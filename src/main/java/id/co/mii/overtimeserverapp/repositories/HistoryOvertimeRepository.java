@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.HistoryOvertime;
 public interface HistoryOvertimeRepository extends JpaRepository<HistoryOvertime, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data History Overtime ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.

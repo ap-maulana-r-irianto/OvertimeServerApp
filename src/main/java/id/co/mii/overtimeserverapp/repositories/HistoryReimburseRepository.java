@@ -9,3 +9,6 @@ import id.co.mii.overtimeserverapp.models.HistoryReimburse;
 public interface HistoryReimburseRepository extends JpaRepository<HistoryReimburse, Integer>{
     
 }
+
+//digunakan untuk mengelola akses dan Pemrosesan data History Reimburse ke dalam basis data.
+//bertanggung jawab menyediakan antarmuka yang memungkinkan melakukan CRUD.
