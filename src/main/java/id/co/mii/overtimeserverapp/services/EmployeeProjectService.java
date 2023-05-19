@@ -36,10 +36,10 @@ public class EmployeeProjectService {
     }
 
     //method untuk (create) menambahkan data employee project
-    public EmployeeProject create(EmployeeProjectRequest employeeProjectRequest) {
-        EmployeeProject employeeProject = modelMapper.map(employeeProjectRequest, EmployeeProject.class);
-        employeeProject.setProject(projectService.getById(employeeProjectRequest.getProject_id()));
-        employeeProject.setEmployee(employeeService.getById(employeeProjectRequest.getEmployee_id()));
+    public EmployeeProject create(EmployeeProject employeeProject) {
+        // EmployeeProject employeeProject = modelMapper.map(employeeProjectRequest, EmployeeProject.class);
+        // employeeProject.setProject(projectService.getById(employeeProjectRequest.getProject_id()));
+        // employeeProject.setEmployee(employeeService.getById(employeeProjectRequest.getEmployee_id()));
         return employeeProjectRepository.save(employeeProject);
     }
 
