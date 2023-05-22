@@ -33,22 +33,22 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/reimburse")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('HR')")
 public class ReimburseController {
     
     private ReimburseService reimburseService;
     private FileStorageService fileStorageService;
     private static final Logger logger = LoggerFactory.getLogger(ReimburseController.class);
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getAll"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping
     public List<Reimburse> getAll() {
         return reimburseService.getAll();
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById/{id}"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getById/{id}"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping("/{id}")
     public Reimburse getById(@PathVariable Integer id) {
         return reimburseService.getById(id);
@@ -59,15 +59,15 @@ public class ReimburseController {
     //     return reimburseService.create(reimburse);
     // }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/create"
-    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/create"
+    @PreAuthorize("hasAuthority('CREATE_HR')")
     @PostMapping
     public Reimburse create(ReimburseRequest reimburseRequest, @RequestParam("file") MultipartFile file) {
         return reimburseService.create(reimburseRequest, file);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update"
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_HR" yang dapat mengakses endpoint "/update"
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/{id}")
     public Reimburse update(
             @PathVariable Integer id,
@@ -76,21 +76,21 @@ public class ReimburseController {
         return reimburseService.update(id, reimburse, file);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/approv/manager/{id}")
     public Reimburse approvManager(
             @PathVariable Integer id) {
         return reimburseService.approvManager(id);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/approv/hr/{id}")
     public Reimburse approvHr(
             @PathVariable Integer id) {
         return reimburseService.approvHr(id);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/reject/manager/{id}")
     public Reimburse rejectManager(
             @PathVariable Integer id,
@@ -98,7 +98,7 @@ public class ReimburseController {
         return reimburseService.rejectManager(id, description);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/reject/hr/{id}")
     public Reimburse rejectHr(
             @PathVariable Integer id,
@@ -106,15 +106,15 @@ public class ReimburseController {
         return reimburseService.rejectHr(id, description);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/paid/{id}")
     public Reimburse paid(
             @PathVariable Integer id) {
         return reimburseService.paid(id);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete/{id}"
-    @PreAuthorize("hasAuthority('DELETE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_HR" yang dapat mengakses endpoint "/delete/{id}"
+    @PreAuthorize("hasAuthority('DELETE_HR')")
     @DeleteMapping("/{id}")
     public Reimburse delete(@PathVariable Integer id) {
         return reimburseService.delete(id);

@@ -19,34 +19,34 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/status")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('HR')")
 public class StatusController {
     
     private StatusService statusService;
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getAll"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping
     public List<Status> getAll() {
         return statusService.getAll();
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getById"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping("/{id}")
     public Status getById(@PathVariable Integer id) {
         return statusService.getById(id);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
-    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_HR" yang dapat mengakses endpoint "/create"
+    @PreAuthorize("hasAuthority('CREATE_HR')")
     @PostMapping
     public Status create(@RequestBody Status status) {
         return statusService.create(status);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update"
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_HR" yang dapat mengakses endpoint "/update"
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/{id}")
     public Status update(
             @PathVariable Integer id,
@@ -54,8 +54,8 @@ public class StatusController {
         return statusService.update(id, status);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete"
-    @PreAuthorize("hasAuthority('DELETE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_HR" yang dapat mengakses endpoint "/delete"
+    @PreAuthorize("hasAuthority('DELETE_HR')")
     @DeleteMapping("/{id}")
     public Status delete(@PathVariable Integer id) {
         return statusService.delete(id);

@@ -19,34 +19,34 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/type")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('HR')")
 public class TypeController {
 
     private TypeService typeService;
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getAll"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping
     public List<Type> getAll() {
         return typeService.getAll();
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getById"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping("/{id}")
     public Type getById(@PathVariable Integer id) {
         return typeService.getById(id);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
-    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_HR" yang dapat mengakses endpoint "/create"
+    @PreAuthorize("hasAuthority('CREATE_HR')")
     @PostMapping
     public Type create(@RequestBody Type type) {
         return typeService.create(type);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update"
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_HR" yang dapat mengakses endpoint "/update"
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/{id}")
     public Type update(
             @PathVariable Integer id,
@@ -54,8 +54,8 @@ public class TypeController {
         return typeService.update(id, type);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete"
-    @PreAuthorize("hasAuthority('DELETE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_HR" yang dapat mengakses endpoint "/delete"
+    @PreAuthorize("hasAuthority('DELETE_HR')")
     @DeleteMapping("/{id}")
     public Type delete(@PathVariable Integer id) {
         return typeService.delete(id);

@@ -20,20 +20,20 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/department")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('HR')")
 public class DepartmentController {
     
     private DepartmentService departmentService;
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getAll"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping
     public List<Department> getAll() {
         return departmentService.getAll();
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/get/{id}"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/get/{id}"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping("/{id}")
     public Department getById(@PathVariable Integer id) {
         return departmentService.getById(id);
@@ -44,15 +44,15 @@ public class DepartmentController {
     //     return departmentService.create(department);
     // }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
-    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_HR" yang dapat mengakses endpoint "/create"
+    @PreAuthorize("hasAuthority('CREATE_HR')")
     @PostMapping
     public Department create(@RequestBody DepartmentRequest departmentRequest) {
         return departmentService.create(departmentRequest);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update/{id}"
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_HR" yang dapat mengakses endpoint "/update/{id}"
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/{id}")
     public Department update(
             @PathVariable Integer id,
@@ -60,8 +60,8 @@ public class DepartmentController {
         return departmentService.update(id, department);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete/{id}"
-    @PreAuthorize("hasAuthority('DELETE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_HR" yang dapat mengakses endpoint "/delete/{id}"
+    @PreAuthorize("hasAuthority('DELETE_HR')")
     @DeleteMapping("/{id}")
     public Department delete(@PathVariable Integer id) {
         return departmentService.delete(id);

@@ -20,20 +20,20 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/overtime")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasRole('HR')")
 public class OvertimeController {
     
     private OvertimeService overtimeService;
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getAll"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getAll"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping
     public List<Overtime> getAll() {
         return overtimeService.getAll();
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_ADMIN" yang dapat mengakses endpoint "/getById/{id}"
-    @PreAuthorize("hasAuthority('READ_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "READ_HR" yang dapat mengakses endpoint "/getById/{id}"
+    @PreAuthorize("hasAuthority('READ_HR')")
     @GetMapping("/{id}")
     public Overtime getById(@PathVariable Integer id) {
         return overtimeService.getById(id);
@@ -44,15 +44,15 @@ public class OvertimeController {
     //     return overtimeService.create(overtime);
     // }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_ADMIN" yang dapat mengakses endpoint "/create"
-    @PreAuthorize("hasAuthority('CREATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "CREATE_HR" yang dapat mengakses endpoint "/create"
+    @PreAuthorize("hasAuthority('CREATE_HR')")
     @PostMapping
     public Overtime create(@RequestBody OvertimeRequest overtimeRequest) {
         return overtimeService.create(overtimeRequest);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_ADMIN" yang dapat mengakses endpoint "/update/{id}"
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "UPDATE_HR" yang dapat mengakses endpoint "/update/{id}"
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/{id}")
     public Overtime update(
             @PathVariable Integer id,
@@ -60,21 +60,21 @@ public class OvertimeController {
         return overtimeService.update(id, overtime);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/approv/manager/{id}")
     public Overtime approvManager(
             @PathVariable Integer id) {
         return overtimeService.approvManager(id);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/approv/hr/{id}")
     public Overtime approvHr(
             @PathVariable Integer id) {
         return overtimeService.approvHr(id);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/reject/manager/{id}")
     public Overtime rejectManager(
             @PathVariable Integer id,
@@ -82,7 +82,7 @@ public class OvertimeController {
         return overtimeService.rejectManager(id, description);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/reject/hr/{id}")
     public Overtime rejectHr(
             @PathVariable Integer id,
@@ -90,15 +90,15 @@ public class OvertimeController {
         return overtimeService.rejectHr(id, description);
     }
 
-    @PreAuthorize("hasAuthority('UPDATE_ADMIN')")
+    @PreAuthorize("hasAuthority('UPDATE_HR')")
     @PutMapping("/paid/{id}")
     public Overtime paid(
             @PathVariable Integer id) {
         return overtimeService.paid(id);
     }
 
-    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_ADMIN" yang dapat mengakses endpoint "/delete/{id}"
-    @PreAuthorize("hasAuthority('DELETE_ADMIN')")
+    //memastikan hanya pengguna yang memiliki otorisasi Sebagai "DELETE_HR" yang dapat mengakses endpoint "/delete/{id}"
+    @PreAuthorize("hasAuthority('DELETE_HR')")
     @DeleteMapping("/{id}")
     public Overtime delete(@PathVariable Integer id) {
         return overtimeService.delete(id);

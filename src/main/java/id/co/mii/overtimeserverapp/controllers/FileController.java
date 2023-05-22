@@ -11,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import id.co.mii.overtimeserverapp.models.dto.responses.UploadFileResponse;
 import id.co.mii.overtimeserverapp.services.FileStorageService;
 
 @RestController
+@PreAuthorize("hasRole('EMPLOYEE')")
 public class FileController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
@@ -30,6 +32,7 @@ public class FileController {
     @Autowired
     private FileStorageService fileStorageService;
 
+    @PreAuthorize("hasAuthority('READ_EMPLOYEE')")
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
@@ -43,6 +46,7 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
+    @PreAuthorize("hasAuthority('READ_EMPLOYEE')")
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
